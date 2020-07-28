@@ -1,0 +1,40 @@
+#####################################################################################
+
+# Server
+implements a rest api. stores and retrieves data from an sql database.
+the actual sql queries are stored in a seperate file that is shared with the non web version of the client side backend.
+
+#####################################################################################
+
+# Backend
+implement the backend using an abstract base class.
+make 2 sublasses:
+
+one subclass sends data to and requests data from the server.
+
+the other subclass stores things and retrieves things from a sql database.
+the actual sql queries are stored in a seperate file.
+load the queries like this:
+
+def executeScriptsFromFile(filename):
+    # Open and read the file as a single buffer
+    fd = open(filename, 'r')
+    sqlFile = fd.read()
+    fd.close()
+
+    # all SQL commands (split on ';')
+    sqlCommands = sqlFile.split(';')
+
+	command = sqlCommands[x]
+
+#####################################################################################
+
+# Middle layer
+if web backend = load web access backend
+else backend = load sql backend
+
+#####################################################################################
+
+# Frontend - PYQT
+
+#####################################################################################
