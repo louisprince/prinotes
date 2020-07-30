@@ -1,12 +1,41 @@
+####################################################################################
+
+# Todo
+
+Read python naming conventions
+Create sqlqueries wrapped within sqlmodel()
+Test sqlmodel()
+Create config file and write a function to check to see which backend to use
+Read this thoroughly: https://www.learnpyqt.com/courses/model-views/modelview-architecture/
+Create model as a sub class of QAbstractTableModel
+Test model using sql backend
+Create UI
+Create ViewController
+Test ViewController
+
+Create server
+Test Server
+Create servermodel()
+Add upnp to the servermodel
+Test model using server backend
+Add settings to ViewController to edit config file
+Test settings
+
+Create build script
+Make a logo
+Write a proper readme(this should be displayed on github and also copied into the application folder when building)
+
+
 #####################################################################################
 
 # Build
 
 server folder and a client folder
 
-copy sqlqueries to both folders
+copy sqlmodel to both folders
 
 http://www.pyinstaller.org/
+https://github.com/mherrmann/fbs-tutorial
 
 #####################################################################################
 
@@ -20,8 +49,7 @@ note -> noteid, notetitle, notecontents, userid
 #####################################################################################
 
 # Server
-implements a rest api. stores and retrieves data from an sql database.
-the actual sql queries are stored in a seperate file that is shared with the non web version of the client side backend.
+implements a rest api. uses a copy of sqlmodel to comunicate with sql database.
 
 query called checkpassword. this query is only used by the server version of the database.
 if username exists checks provided password hash equals stored password hash.
@@ -32,37 +60,31 @@ you could have a function called checkSessionId
 #####################################################################################
 
 # Client Model
-implement the backend using an abstract base class. this class itself inherits from QAbstractTableModel
+inherits from QAbstractTableModel
+gets data from and saves data to backend
 
-make 2 sublasses:
+if config is web backend = webmodel
+else backend = sqlmodel
 
-one subclass sends data to and requests data from the server.
+sqlmodel does nothing but run sql queries and return them to the modelview
+webmodel sends data from the model to the server and returns data from the server to the model
 
-the other subclass stores things and retrieves things from a sql database.
-the actual sql queries are stored in a seperate file.
-load the queries like this:
+have an authentication method. this will only be run if backend = webmodel
 
-def executeScriptsFromFile(filename):
-	# Open and read the file as a single buffer
-	fd = open(filename, 'r')
-	sqlFile = fd.read()
-	fd.close()
-
-	# all SQL commands (split on ';')
-	sqlCommands = sqlFile.split(';')
-
-	command = sqlCommands[x]
-
-	# use this to add relevant data to sql query
-	# command.replace("userid", id)
+getnotes()
+addnote()
+editnote()
+deletenote()
 
 #####################################################################################
 
 # ViewController - PYQT
-if config is web backend = webmodel
-else backend = sqlmodel
+if config is set to web backend an signup/login screen should be shown when the application is first launched
+store the hash of the users password in a local file. if this file exists login automatically.
+if there is a problem auto logging in bring up the signup/login screen
+
 
 #####################################################################################
 
-https://www.learnpyqt.com/courses/model-views/modelview-architecture/
+
 https://www.learnpyqt.com/
