@@ -30,9 +30,9 @@ def add_user(username, passwordhash):
 	check = connection.cursor().fetchone() 
 	print(check)
 #
-#	if check is none:
+#	if check is None:
 #		print("Adding user " + username + " to the database")
-#		connection.execute("INSERT INTO user (username, passwordhash) VALUES(?, ?)", (username, passwordhash))
+	connection.execute("INSERT INTO user (username, passwordhash) VALUES(?, ?)", (username, passwordhash))
 #		return True
 #	else:
 #		print("Username already exists. Please choose another")		
